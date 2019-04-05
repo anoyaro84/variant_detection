@@ -1,0 +1,7 @@
+name: freebayes
+channels:
+    - bioconda
+dependencies:
+    - freebayes
+    - bcftools=1.5
+

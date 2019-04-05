@@ -1,0 +1,60 @@
+
+#############################################
+# Global option                             #
+#############################################
+Ncores: 5 
+
+#############################################
+# Path configuration                        #
+#############################################
+
+# if True, global environment variables are used in pipeline, if available.
+
+Use_global:   True
+Use_BAM:    FALSE
+
+# global variables with which paths are set (only used if Use_global is True)
+environmental:
+    PATH_FASTQ: 'PATH_FASTQ'
+    PATH_VAR: 'PATH_VARIANT_OUTPUT'
+    PATH_BAM: 'PATH_ALIGNED_BAM'
+    INDEX:  'STAR_INDEX'
+    REFLIB: 'STAR_FUSION_INDEX'
+
+path:
+    fastq:  'fastq'
+    qc: 'qc'
+    log:    'logs'
+    variant: 'variant'
+    fusion: 'fusions'
+    bam: 'bams'
+
+
+#############################################
+# Rule configuration                        #
+#############################################
+
+
+fastqc:
+      extra: ''
+
+cutadapt:
+      extra: >-
+          -a AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC
+          --minimum-length 30
+
+# options for variant detection
+vardict:
+    bedfile: /home/yo.kim/Resource/hg19_genes_trimmed.bed
+    reference: /home/yo.kim/Resource/refseq/Homo_sapiens.GRCh37.75.dna.primary_assembly.fa
+    path_vardict: /home/yo.kim/lib/VarDictJava
+    allele_frequency: 0.01
+    options: "-C -z -c 1 -S 2 -E 3 -g 5"
+
+# genome resource lib should be prepared.
+
+star_fusion:
+    reflib:
+        '/home/NFS/users/yo.kim/Resource/Hg19_CTAT_resource_lib'
+    index:
+        '/home/NFS/users/yo.kim/Resource/Hg19_CTAT_resource_lib'
